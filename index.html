@@ -53,8 +53,20 @@ ul {
         return "???";
     }
 
-    function refreshResults() {
+    function refreshResults(firstload) {
+        if(firstload) {
+            var url = new URL(window.location.href);
+            var textparam = url.searchParams.get("text");
+            if(textparam !== null)
+                document.getElementById("text").value = textparam;
+        }
+
         var text = document.getElementById("text").value;
+        var link = window.location.href.split('?')[0] + '?text=' + encodeURIComponent(text);
+        if(text.length === 0)
+            link = window.location.href.split('?')[0];
+
+        document.getElementById("permalink").href = link;
         var results = document.getElementById("results");
         while(results.firstChild)
             results.removeChild(results.firstChild);
@@ -74,9 +86,10 @@ ul {
     }
 </script>
 
-<body onload="refreshResults();">
+<body onload="refreshResults(true);">
 <div id='mainblock'>
-    <input type="text" oninput="refreshResults();" id="text" autofocus>
+    <input type="text" oninput="refreshResults(false);" id="text" autofocus>
+    <a id="permalink" href="">permalink</a>
     <table id="results"></table>
 </div>
 </body>
