@@ -53,6 +53,18 @@ ul {
         return "???";
     }
 
+    function toUtf8(codepoint) {
+        var encoder = new TextEncoder();
+        var ret = encoder.encode(String.fromCodePoint(codepoint));
+        return Array.from(ret);
+    }
+
+    function toUtf8Hex(codepoint) {
+        var ret = toUtf8(codepoint);
+        ret = ret.map(function(b){return '0x' + b.toString(16).toUpperCase();});
+        return ret.join(", ");
+    }
+
     function refreshResults(firstload) {
         if(firstload) {
             var url = new URL(window.location.href);
@@ -71,13 +83,13 @@ ul {
         while(results.firstChild)
             results.removeChild(results.firstChild);
 
-        results.appendChild(makeTableRow("text", "codepoint", "name"));
+        results.appendChild(makeTableRow("text", "codepoint", "name", "UTF-8"));
 
         for(var i = 0; i < text.length; ++i) {
             var cp = text.codePointAt(i);
             var nonbmp = (text.charCodeAt(i) !== cp);
             var tx = text.substr(i, 1 + Number(nonbmp));
-            results.appendChild(makeTableRow(tx, 'U+' + cp.toString(16).toUpperCase(), getCodepointName(cp)));
+            results.appendChild(makeTableRow(tx, 'U+' + cp.toString(16).toUpperCase(), getCodepointName(cp), toUtf8Hex(cp)));
 
             //skip over second codeunit if its surrogate pair
             if(nonbmp)
