@@ -95,6 +95,9 @@ ul {
             if(nonbmp)
                 ++i;
         }
+
+        if(!firstload)
+            history.replaceState(null, '', link);
     }
 </script>
 
