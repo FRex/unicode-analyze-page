@@ -66,6 +66,7 @@ ul {
     }
 
     function refreshResults(firstload) {
+        var skipascii = document.getElementById("skipascii").checked;
         if(firstload) {
             var url = new URL(window.location.href);
             var textparam = url.searchParams.get("text");
@@ -89,6 +90,11 @@ ul {
             var cp = text.codePointAt(i);
             var nonbmp = (text.charCodeAt(i) !== cp);
             var tx = text.substr(i, 1 + Number(nonbmp));
+
+            //skip adding this row if its ascii codepoint and we are skipping ascii
+            if(skipascii && cp < 128)
+                continue;
+
             results.appendChild(makeTableRow(tx, 'U+' + cp.toString(16).toUpperCase(), getCodepointName(cp), toUtf8Hex(cp)));
 
             //skip over second codeunit if its surrogate pair
@@ -105,6 +111,7 @@ ul {
 <div id='mainblock'>
     <input type="text" oninput="refreshResults(false);" id="text" autofocus>
     <a id="permalink" href="">permalink</a>
+    <label>Skip ASCII:<input id="skipascii" type="checkbox" onchange="refreshResults(false);"></label>
     <table id="results"></table>
 </div>
 </body>
