@@ -4,6 +4,8 @@ A simple website where you type in a string and get a list of all Unicode charac
 
 To see it in action go to [https://frex.github.io/unicode.html](https://frex.github.io/unicode.html).
 
+![screenshot.png](screenshot.png)
+
 To deploy this tool yoursef you need the two files:
 1. `index.html` - the HTML with input box and inline JS to analyze the string.
 2. `data.js` - the data as JSON, generated from `UCD.zip` and `Unihan.zip` files.
