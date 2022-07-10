@@ -7,6 +7,13 @@ It also displays meaning of CJK characters from the Unihan database, but this is
 No web requests past the original one for the page and data JSON, updates in real time.
 
 To see it in action go to [https://frex.github.io/unicode.html](https://frex.github.io/unicode.html).
+Some examples:
+1. [abc](https://frex.github.io/unicode.html?text=abc)
+2. [español](https://frex.github.io/unicode.html?text=espa%C3%B1ol)
+3. [😀😁😎](https://frex.github.io/unicode.html?text=%F0%9F%98%80%F0%9F%98%81%F0%9F%98%8E)
+4. [👨‍👩‍👧‍👦](https://frex.github.io/unicode.html?text=%F0%9F%91%A8%E2%80%8D%F0%9F%91%A9%E2%80%8D%F0%9F%91%A7%E2%80%8D%F0%9F%91%A6)
+5. [日本語](https://frex.github.io/unicode.html?text=%E6%97%A5%E6%9C%AC%E8%AA%9E)
+6. [русский язык](https://frex.github.io/unicode.html?text=%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9%20%D1%8F%D0%B7%D1%8B%D0%BA)
 
 ![screenshot.png](screenshot.png)
 
