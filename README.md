@@ -33,7 +33,7 @@ Other tools to deal with Unicode strings, analyze them, convert them, etc.:
 1. [https://www.fontspace.com/unicode/analyzer](https://www.fontspace.com/unicode/analyzer) - updates
 in real time, but the first time character appears it takes a split second to load its info. It also
 only lists the codepoint of CJK characters, but not their meanings. Provides the link with your input
-prefilled but it's not plaintext in the URL. Does a request for every update if there are new characters
+prefilled but it's not plaintext in the URL (it looks base 64 encoded, which for Unicode input makes it shorter in URL than URL encoding done by browser). Does a request for every update if there are new characters
 not previously seen in the input (but this data is cached so typing `ab` does 2 requests, and `aa` just 1).
 2. [https://unicodemap.org/search.asp](https://unicodemap.org/search.asp) - limit of 1000 characters,
 splits BMP characters (e.g. emojis) into surrogate pairs, doesn't update in real time, has no
