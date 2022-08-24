@@ -45,7 +45,7 @@ that leads to this page and has prefilled input.
 in real time, shows you what characters might cause problems and be encoded in longer encodings in SMS text messages.
 5. [https://www.soscisurvey.de/tools/view-chars.php](https://www.soscisurvey.de/tools/view-chars.php) - requires
 a click to execute, shows non-printable characters hidden in the string, but nothing else.
-6. [https://www.fileformat.info/info/unicode/char/search.htm](https://www.fileformat.info/info/unicode/char/search.htm) - requires a click to excute, can only search one character a time it seems. **Includes CJK meaning**.
+6. [https://www.fileformat.info/info/unicode/char/search.htm](https://www.fileformat.info/info/unicode/char/search.htm) - requires a click to excute, can only search one character a time it seems (or you can search by Unicode code for some specific character). **Includes CJK meaning**.
 7. [https://r12a.github.io/app-analysestring/index.html](https://r12a.github.io/app-analysestring/index.html) - requires a click to execute, and does web request to get high res picture of non-CJK characters. **No CJK meaning, but for CJK provides Unihan Unicode database link, which has this and other information.**
 8. [https://chrome.google.com/webstore/detail/unicode-analyzer/pipjflhdnjcdflbkmoldkkpphmhcfaio](https://chrome.google.com/webstore/detail/unicode-analyzer/pipjflhdnjcdflbkmoldkkpphmhcfaio) - Chrome extension, lots of information provided on the
 tab that opens for analysis, convenient for existing web page, but to analyze own string you need to edit the URL or get
