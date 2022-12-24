@@ -14,8 +14,17 @@ Some examples:
 4. [👨‍👩‍👧‍👦](https://frex.github.io/unicode.html?text=%F0%9F%91%A8%E2%80%8D%F0%9F%91%A9%E2%80%8D%F0%9F%91%A7%E2%80%8D%F0%9F%91%A6)
 5. [日本語](https://frex.github.io/unicode.html?text=%E6%97%A5%E6%9C%AC%E8%AA%9E)
 6. [русский язык](https://frex.github.io/unicode.html?text=%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9%20%D1%8F%D0%B7%D1%8B%D0%BA)
+7. [한국어](https://frex.github.io/unicode.html?text=%ED%95%9C%EA%B5%AD%EC%96%B4)
 
 ![screenshot.png](screenshot.png)
+
+**NOTE**: precomposed Hangul characters (link 7. above) have no names listed, but the block is listed correctly as `Hangul Syllables`.
+Characters from other blocks (`Hangul Jamo`, `Hangul Compatibility Jamo`, `Hangul Jamo Extended-A`, and `Hangul Jamo Extended-B`)
+have names listed. This is how Unicode zip files list the data about these characters. I might try to do something about it
+in the future to provide readings/romanization of syllables for precomposed Hangul.
+
+
+# Usage
 
 To deploy this tool yoursef you need the three files:
 1. `index.html` - the HTML with input box and inline JS to analyze the string.
@@ -29,6 +38,9 @@ To get the `UCD.zip` and `Unihan.zip` files, visit
 
 You don't need to unpack them, just drop them in same directory as `gendata.py`
 and run it, to generate `data.js` and `blocks.js`. The meaning of CJK characters is taken from `kDefinition` field.
+
+
+# Other
 
 Other tools to deal with Unicode strings, analyze them, convert them, etc.:
 1. [https://www.fontspace.com/unicode/analyzer](https://www.fontspace.com/unicode/analyzer) - updates
