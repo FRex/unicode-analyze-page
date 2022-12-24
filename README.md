@@ -1,7 +1,7 @@
 # Unicode Analyze Page
 
 A simple website where you type in a string and get a list of all Unicode characters in it,
-their name, value and UTF-8 encoding.
+their name, value, UTF-8 encoding and Block.
 
 It also displays meaning of CJK characters from the Unihan database, but this is **not** a translator.
 No web requests past the original one for the page and data JSON, updates in real time.
@@ -17,17 +17,18 @@ Some examples:
 
 ![screenshot.png](screenshot.png)
 
-To deploy this tool yoursef you need the two files:
+To deploy this tool yoursef you need the three files:
 1. `index.html` - the HTML with input box and inline JS to analyze the string.
 2. `data.js` - the data as JSON, generated from `UCD.zip` and `Unihan.zip` files.
+3. `blocks.js` - the data as JSON, generated from `UCD.zip` file.
 
-Both files and the `gendata.py` script that generates `data.js` are in this repo.
+All the files and the `gendata.py` script that generates `data.js` and `blocks.js` are in this repo.
 
 To get the `UCD.zip` and `Unihan.zip` files, visit
 [https://www.unicode.org/Public/UCD/latest/ucd/](https://www.unicode.org/Public/UCD/latest/ucd/).
 
 You don't need to unpack them, just drop them in same directory as `gendata.py`
-and run it, to generate `data.js`. The meaning of CJK characters is taken from `kDefinition` field.
+and run it, to generate `data.js` and `blocks.js`. The meaning of CJK characters is taken from `kDefinition` field.
 
 Other tools to deal with Unicode strings, analyze them, convert them, etc.:
 1. [https://www.fontspace.com/unicode/analyzer](https://www.fontspace.com/unicode/analyzer) - updates
