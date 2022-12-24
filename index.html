@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script type="text/javascript" src="data.js"></script>
+<script type="text/javascript" src="blocks.js"></script>
 <title>Unicode</title>
 <style>
 #mainblock {
@@ -65,6 +66,14 @@ ul {
         return ret.join(", ");
     }
 
+    function findBlock(codepoint) {
+        for(const block of blocks)
+            if (block[0] <= codepoint && codepoint <= block[1])
+                return block[2];
+
+        return "No_Block";
+    }
+
     function refreshResults(firstload) {
         var skipascii = document.getElementById("skipascii").checked;
         if(firstload) {
@@ -84,8 +93,9 @@ ul {
         while(results.firstChild)
             results.removeChild(results.firstChild);
 
-        results.appendChild(makeTableRow("text", "codepoint", "name", "UTF-8"));
+        results.appendChild(makeTableRow("text", "codepoint", "name", "UTF-8", "Block"));
 
+        var truelength = 0;
         for(var i = 0; i < text.length; ++i) {
             var cp = text.codePointAt(i);
             var nonbmp = (text.charCodeAt(i) !== cp);
@@ -95,12 +105,16 @@ ul {
             if(skipascii && cp < 128)
                 continue;
 
-            results.appendChild(makeTableRow(tx, 'U+' + cp.toString(16).toUpperCase(), getCodepointName(cp), toUtf8Hex(cp)));
+            //increment here to not count ASCII when skipping ASCII and never count UTF-16 surrogates
+            ++truelength;
+            results.appendChild(makeTableRow(tx, 'U+' + cp.toString(16).toUpperCase(), getCodepointName(cp), toUtf8Hex(cp), findBlock(cp)));
 
             //skip over second codeunit if its surrogate pair
             if(nonbmp)
                 ++i;
         }
+
+        document.getElementById('lengthoutput').innerHTML = truelength;
 
         if(!firstload)
             history.replaceState(null, '', link);
@@ -111,6 +125,7 @@ ul {
 <div id='mainblock'>
     <input type="text" oninput="refreshResults(false);" id="text" autofocus>
     <a id="permalink" href="">permalink</a>
+    <span id="lengthoutput">0</span>
     <label>Skip ASCII:<input id="skipascii" type="checkbox" onchange="refreshResults(false);"></label>
     <table id="results"></table>
 </div>

@@ -8,6 +8,7 @@ def loadlines(zipname, fname):
 
 code = loadlines('UCD.zip', 'UnicodeData.txt')
 uhan = loadlines('Unihan.zip', 'Unihan_Readings.txt')
+bloc = loadlines('UCD.zip', 'Blocks.txt')
 
 out = []
 for line in code:
@@ -21,8 +22,20 @@ for line in uhan:
     if len(parts) == 3 and parts[1] == 'kDefinition':
         out.append((int(parts[0][2:], 16), parts[2]))
 
+blocks = []
+for line in bloc:
+    if line.startswith('#') or not line.strip():
+        continue
+    nums, item = line.split('; ')
+    a, b = nums.split('..')
+    # NOTE: this range is inclusiv [a, b] not [a, b)
+    blocks.append((int(a, 16), int(b, 16), item))
+
+
 unihan = len(out) - chars
+print("blocks: ", len(blocks))
 print("chars: ", chars)
 print("unihan chars: ", unihan)
 print("total: ", chars + unihan)
 open('data.js', 'w').write("data=JSON.parse('" + json.dumps(out).replace("'", "\\'") + "')\n")
+open('blocks.js', 'w').write("blocks=JSON.parse('" + json.dumps(blocks).replace("'", "\\'") + "')\n")
