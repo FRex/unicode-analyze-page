@@ -1,45 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script type="text/javascript" src="data.js"></script>
-<script type="text/javascript" src="blocks.js"></script>
-<title>Unicode</title>
-<style>
-#mainblock {
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 2%;
-    padding-left: 2%;
-    padding-right: 2%;
-    max-width: 60%;
-    text-align: center;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="data.js"></script>
+    <script type="text/javascript" src="blocks.js"></script>
+    <title>Unicode</title>
+    <style>
+        #mainblock {
+            margin-left: auto;
+            margin-right: auto;
+            padding-top: 2%;
+            padding-left: 2%;
+            padding-right: 2%;
+            max-width: 60%;
+            text-align: center;
+        }
 
-#mainblock > table {
-    margin: auto;
-}
+        #mainblock>table {
+            margin: auto;
+        }
 
-#text {
-    width: 100%;
-    text-align: center;
-}
+        #text {
+            width: 100%;
+            text-align: center;
+        }
 
-table, th, td {
-  border: 1px solid black;
-}
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
 
-ul {
-    padding-bottom: 2em;
-}
-</style>
+        ul {
+            padding-bottom: 2em;
+        }
+
+    </style>
 </head>
 
 <script>
     function makeTableRow(...items) {
         var ret = document.createElement("tr");
-        for(var i = 0; i < items.length; ++i) {
+        for (var i = 0; i < items.length; ++i) {
             var td = document.createElement("td");
             td.textContent = items[i];
             ret.appendChild(td);
@@ -48,8 +52,8 @@ ul {
     }
 
     function getCodepointName(cp) {
-        for(var i = 0; i < data.length; ++i)
-            if(data[i][0] === cp)
+        for (var i = 0; i < data.length; ++i)
+            if (data[i][0] === cp)
                 return data[i][1];
         return "???";
     }
@@ -62,12 +66,12 @@ ul {
 
     function toUtf8Hex(codepoint) {
         var ret = toUtf8(codepoint);
-        ret = ret.map(function(b){return '0x' + b.toString(16).toUpperCase();});
+        ret = ret.map(function (b) { return '0x' + b.toString(16).toUpperCase(); });
         return ret.join(", ");
     }
 
     function findBlock(codepoint) {
-        for(const block of blocks)
+        for (const block of blocks)
             if (block[0] <= codepoint && codepoint <= block[1])
                 return block[2];
 
@@ -76,33 +80,33 @@ ul {
 
     function refreshResults(firstload) {
         var skipascii = document.getElementById("skipascii").checked;
-        if(firstload) {
+        if (firstload) {
             var url = new URL(window.location.href);
             var textparam = url.searchParams.get("text");
-            if(textparam !== null)
+            if (textparam !== null)
                 document.getElementById("text").value = textparam;
         }
 
         var text = document.getElementById("text").value;
         var link = window.location.href.split('?')[0] + '?text=' + encodeURIComponent(text);
-        if(text.length === 0)
+        if (text.length === 0)
             link = window.location.href.split('?')[0];
 
         document.getElementById("permalink").href = link;
         var results = document.getElementById("results");
-        while(results.firstChild)
+        while (results.firstChild)
             results.removeChild(results.firstChild);
 
         results.appendChild(makeTableRow("text", "codepoint", "name", "UTF-8", "Block"));
 
         var truelength = 0;
-        for(var i = 0; i < text.length; ++i) {
+        for (var i = 0; i < text.length; ++i) {
             var cp = text.codePointAt(i);
             var nonbmp = (text.charCodeAt(i) !== cp);
             var tx = text.substr(i, 1 + Number(nonbmp));
 
             //skip adding this row if its ascii codepoint and we are skipping ascii
-            if(skipascii && cp < 128)
+            if (skipascii && cp < 128)
                 continue;
 
             //increment here to not count ASCII when skipping ASCII and never count UTF-16 surrogates
@@ -110,25 +114,25 @@ ul {
             results.appendChild(makeTableRow(tx, 'U+' + cp.toString(16).toUpperCase(), getCodepointName(cp), toUtf8Hex(cp), findBlock(cp)));
 
             //skip over second codeunit if its surrogate pair
-            if(nonbmp)
+            if (nonbmp)
                 ++i;
         }
 
         document.getElementById('lengthoutput').innerHTML = truelength;
 
-        if(!firstload)
+        if (!firstload)
             history.replaceState(null, '', link);
     }
 </script>
 
 <body onload="refreshResults(true);">
-<div id='mainblock'>
-    <input type="text" oninput="refreshResults(false);" id="text" autofocus>
-    <a id="permalink" href="">permalink</a>
-    <span id="lengthoutput">0</span>
-    <label>Skip ASCII:<input id="skipascii" type="checkbox" onchange="refreshResults(false);"></label>
-    <table id="results"></table>
-</div>
+    <div id='mainblock'>
+        <input type="text" oninput="refreshResults(false);" id="text" autofocus>
+        <a id="permalink" href="">permalink</a>
+        <span id="lengthoutput">0</span>
+        <label>Skip ASCII:<input id="skipascii" type="checkbox" onchange="refreshResults(false);"></label>
+        <table id="results"></table>
+    </div>
 </body>
 
 </html>
