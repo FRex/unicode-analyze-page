@@ -52,8 +52,8 @@ not previously seen in the input (but this data is cached so typing `ab` does 2 
 splits non-BMP characters (e.g. emojis) into surrogate pairs, doesn't update in real time, has no
 CJK character meaning. Provides a link with your input prefilled.
 3. [https://devina.io/unicode-analyser](https://devina.io/unicode-analyser) - updates in real time,
-has more info than just codepoint values, fast, but still no CJK meaning data. No way to make a link
-that leads to this page and has prefilled input.
+has more info than just codepoint values, fast, but still no CJK meaning data. Until late 2022 it
+had no way to make a link that leads to the page and has prefilled input.
 4. [https://freetools.textmagic.com/unicode-detector](https://freetools.textmagic.com/unicode-detector) - updates
 in real time, shows you what characters might cause problems and be encoded in longer encodings in SMS text messages.
 5. [https://www.soscisurvey.de/tools/view-chars.php](https://www.soscisurvey.de/tools/view-chars.php) - requires
