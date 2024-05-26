@@ -8,6 +8,7 @@ No web requests past the original one for the page and data JSON, updates in rea
 
 To see it in action go to [https://frex.github.io/unicode.html](https://frex.github.io/unicode.html).
 Some examples:
+
 1. [abc](https://frex.github.io/unicode.html?text=abc)
 2. [español](https://frex.github.io/unicode.html?text=espa%C3%B1ol)
 3. [😀😁😎](https://frex.github.io/unicode.html?text=%F0%9F%98%80%F0%9F%98%81%F0%9F%98%8E)
@@ -27,6 +28,7 @@ in the future to provide readings/romanization of syllables for precomposed Hang
 # Usage
 
 To deploy this tool yoursef you need the three files:
+
 1. `index.html` - the HTML with input box and inline JS to analyze the string.
 2. `data.js` - the data as JSON, generated from `UCD.zip` and `Unihan.zip` files.
 3. `blocks.js` - the data as JSON, generated from `UCD.zip` file.
@@ -43,6 +45,7 @@ and run it, to generate `data.js` and `blocks.js`. The meaning of CJK characters
 # Other
 
 Other tools to deal with Unicode strings, analyze them, convert them, etc.:
+
 1. [https://www.fontspace.com/unicode/analyzer](https://www.fontspace.com/unicode/analyzer) - updates
 in real time, but the first time character appears it takes a split second to load its info. It also
 only lists the codepoint of CJK characters, but not their meanings. Provides the link with your input
