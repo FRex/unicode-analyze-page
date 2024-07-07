@@ -44,7 +44,7 @@ and run it, to generate `data.js` and `blocks.js`. The meaning of CJK characters
 
 # Other
 
-Other tools to deal with Unicode strings, analyze them, convert them, etc.:
+Other tools to deal with Unicode strings, analyze them, convert them, etc. (some of these descriptions might be outdated since I've checked them once in the past, check yourself if you want to be doubly sure):
 
 1. [https://www.fontspace.com/unicode/analyzer](https://www.fontspace.com/unicode/analyzer) - updates
 in real time, but the first time character appears it takes a split second to load its info. It also
@@ -68,3 +68,4 @@ tab that opens for analysis, convenient for existing web page, but to analyze ow
 it typed into some input box on another website first. No CJK meaning.
 9. [https://www.branah.com/unicode-converter](https://www.branah.com/unicode-converter) - no character information or CJK
 meaning, but converts given string in realtime to many UTF- encodings, big and little endian, percent encoding, etc.
+10. [https://decodeunicode.org](https://decodeunicode.org) - modern and fast German made website, with a nice search, showing blocks, languages (named in German for example Japanese is Japanisch), properties, etc. of the characters, but no CJK meaning.
