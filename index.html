@@ -77,6 +77,13 @@
         return "No_Block";
     }
 
+    function isPlainCEncode(codepoint) {
+        // do not plain encode " and \ chars
+        if (codepoint === 92 || codepoint == 34) return false;
+        if (32 <= codepoint && codepoint <= 126) return true;
+        return false;
+    }
+
     function refreshResults(firstload) {
         document.getElementById('unicode_version').innerText = unicode_version;
         var skipascii = document.getElementById("skipascii").checked;
@@ -100,6 +107,7 @@
         results.appendChild(makeTableRow("text", "codepoint", "name", "UTF-8", "Block"));
 
         var truelength = 0;
+        var cencoding = '"';
         for (var i = 0; i < text.length; ++i) {
             var cp = text.codePointAt(i);
             var nonbmp = (text.charCodeAt(i) !== cp);
@@ -108,6 +116,18 @@
             //skip adding this row if its ascii codepoint and we are skipping ascii
             if (skipascii && cp < 128)
                 continue;
+
+            //TODO: should this be before or after ascii skip?
+            for (const x of toUtf8(cp)) {
+                if (isPlainCEncode(cp))
+                    cencoding += text[i];
+                else if (cp == 92) // the \ char
+                    cencoding += "\\\\";
+                else if (cp == 34) // the " char
+                    cencoding += "\\\"";
+                else
+                    cencoding += '\\x' + x.toString(16);
+            }
 
             //increment here to not count ASCII when skipping ASCII and never count UTF-16 surrogates
             ++truelength;
@@ -118,7 +138,9 @@
                 ++i;
         }
 
-        document.getElementById('lengthoutput').innerHTML = truelength;
+        cencoding += '"';
+        document.getElementById('cencoding').innerText = cencoding;
+        document.getElementById('lengthoutput').innerText = truelength;
 
         if (!firstload)
             history.replaceState(null, '', link);
@@ -129,6 +151,7 @@
     <div id='mainblock'>
         <input type="text" oninput="refreshResults(false);" id="text" autofocus>
         <div id="unicode_version"></div>
+        <div id="cencoding"></div>
         <a id="permalink" href="">permalink</a>
         <span id="lengthoutput">0</span>
         <label>Skip ASCII:<input id="skipascii" type="checkbox" onchange="refreshResults(false);"></label>
