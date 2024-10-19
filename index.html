@@ -145,6 +145,13 @@
         if (!firstload)
             history.replaceState(null, '', link);
     }
+
+    function reverseInput() {
+        var text = document.getElementById("text").value;
+        // NOTE: text.split("").reverse().join("") would break non-BMP Unicode like emojis
+        document.getElementById("text").value = [...text].reverse().join("");
+        refreshResults(false);
+    }
 </script>
 
 <body onload="refreshResults(true);">
@@ -152,6 +159,7 @@
         <input type="text" oninput="refreshResults(false);" id="text" autofocus>
         <div id="unicode-version"></div>
         <div id="cencoding"></div>
+        <input type="button" value="Reverse" onclick="reverseInput()" />
         <a id="permalink" href="">permalink</a>
         <span id="lengthoutput">0</span>
         <label>Skip ASCII:<input id="skipascii" type="checkbox" onchange="refreshResults(false);"></label>
