@@ -85,7 +85,7 @@
     }
 
     function refreshResults(firstload) {
-        document.getElementById('unicode_version').innerText = unicode_version;
+        document.getElementById('unicode-version').innerText = unicode_version;
         var skipascii = document.getElementById("skipascii").checked;
         if (firstload) {
             var url = new URL(window.location.href);
@@ -150,7 +150,7 @@
 <body onload="refreshResults(true);">
     <div id='mainblock'>
         <input type="text" oninput="refreshResults(false);" id="text" autofocus>
-        <div id="unicode_version"></div>
+        <div id="unicode-version"></div>
         <div id="cencoding"></div>
         <a id="permalink" href="">permalink</a>
         <span id="lengthoutput">0</span>
