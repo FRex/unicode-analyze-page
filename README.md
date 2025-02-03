@@ -1,7 +1,8 @@
 # Unicode Analyze Page
 
 A simple website where you type in a string and get a list of all Unicode characters in it,
-their name, value, UTF-8 encoding (including an escaped string for C or Python or similar language), and Block.
+their name, value, UTF-8 encoding (including an escaped string for C or Python or similar language),
+UTF-16 (to clearly show the UTF-16 surrogate pairs in case of emojis and other non-BMP characters) and Block.
 
 It also displays meaning of CJK characters from the Unihan database, but this is **not** a translator.
 No web requests past the original one for the page and data JSON, updates in real time.
