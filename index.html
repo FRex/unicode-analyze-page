@@ -84,6 +84,14 @@
         return false;
     }
 
+    function toUtf16Values(text) {
+        // NOTE: Array.from(text) iterated over codepoints, and we want separate UTF-16 code units
+        var ret = [];
+        for (var i = 0; i < text.length; ++i)
+            ret.push(text[i]);
+        return Array.from(ret).map(x => '0x' + x.codePointAt(0).toString(16).toUpperCase());
+    }
+
     function refreshResults(firstload) {
         document.getElementById('unicode-version').innerText = unicode_version;
         var skipascii = document.getElementById("skipascii").checked;
@@ -104,7 +112,7 @@
         while (results.firstChild)
             results.removeChild(results.firstChild);
 
-        results.appendChild(makeTableRow("text", "codepoint", "name", "UTF-8", "Block"));
+        results.appendChild(makeTableRow("text", "codepoint", "name", "UTF-8", "UTF-16", "Block"));
 
         var truelength = 0;
         var cencoding = '"';
@@ -131,7 +139,7 @@
 
             //increment here to not count ASCII when skipping ASCII and never count UTF-16 surrogates
             ++truelength;
-            results.appendChild(makeTableRow(tx, 'U+' + cp.toString(16).toUpperCase(), getCodepointName(cp), toUtf8Hex(cp), findBlock(cp)));
+            results.appendChild(makeTableRow(tx, 'U+' + cp.toString(16).toUpperCase(), getCodepointName(cp), toUtf8Hex(cp), toUtf16Values(tx), findBlock(cp)));
 
             //skip over second codeunit if its surrogate pair
             if (nonbmp)
