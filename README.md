@@ -17,6 +17,7 @@ Some examples:
 5. [日本語](https://frex.github.io/unicode.html?text=%E6%97%A5%E6%9C%AC%E8%AA%9E)
 6. [русский язык](https://frex.github.io/unicode.html?text=%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9%20%D1%8F%D0%B7%D1%8B%D0%BA)
 7. [한국어](https://frex.github.io/unicode.html?text=%ED%95%9C%EA%B5%AD%EC%96%B4)
+8. [ඞඞඞ](https://frex.github.io/unicode.html?text=%E0%B6%9E%E0%B6%9E%E0%B6%9E)
 
 ![screenshot.png](screenshot.png)
 
