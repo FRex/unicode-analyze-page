@@ -27,9 +27,10 @@ for line in code:
 
 chars = len(out)
 for line in uhan:
-    parts = line.split(maxsplit=2)
-    if len(parts) == 3 and parts[1] == "kDefinition":
-        out.append((int(parts[0][2:], 16), parts[2]))
+    if "kDefinition" in line:
+        parts = line.split(maxsplit=2)
+        if len(parts) == 3 and parts[1] == "kDefinition":
+            out.append((int(parts[0][2:], 16), parts[2]))
 
 blocks = []
 for line in bloc:
