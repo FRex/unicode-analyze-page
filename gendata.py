@@ -1,3 +1,4 @@
+import collections
 import zipfile
 import json
 
@@ -39,6 +40,23 @@ for line in bloc:
     # NOTE: this range is inclusiv [a, b] not [a, b)
     blocks.append((int(a, 16), int(b, 16), item))
 
+# some characters have both a name in UnicodeData.txt and a kDefinition in Unihan_Readings.txt
+# for example 63787 is both 'CJK COMPATIBILITY IDEOGRAPH-F92B' and 'wolf'
+# so find those duplicates here and merge their two strings into one
+dedup = collections.defaultdict(list)
+for codepoint, text in out:
+    dedup[codepoint].append(text)
+
+doubles = [item for item in dedup.items() if len(item[1]) > 1]
+if doubles:
+    print(f"{len(doubles)} codepoints have duplicate texts.")
+    # for codepoint, texts in doubles:
+    # print(f"{codepoint} - {hex(codepoint)} - {texts}")
+else:
+    print("No codepoints with duplicate texts.")
+
+# join the texts if there is more than one plus sort output by codepoint
+out = sorted((codepoint, " ".join(texts)) for codepoint, texts in dedup.items())
 
 unihan = len(out) - chars
 
