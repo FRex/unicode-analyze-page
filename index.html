@@ -51,9 +51,21 @@
     }
 
     function getCodepointName(cp) {
-        for (var i = 0; i < data.length; ++i)
-            if (data[i][0] === cp)
-                return data[i][1];
+        var lo = 0;
+        var hi = data.length;
+
+        while (true) {
+            var len = hi - lo;
+            if (len <= 1) break;
+            var mid = lo + Math.floor(len / 2);
+
+            if (data[mid][0] <= cp)
+                lo = mid;
+            else
+                hi = mid;
+        }
+
+        if (data[lo][0] == cp) return data[lo][1];
         return "???";
     }
 
