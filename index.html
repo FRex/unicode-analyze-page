@@ -65,7 +65,7 @@
                 hi = mid;
         }
 
-        if (data[lo][0] == cp) return data[lo][1];
+        if (data[lo][0] === cp) return data[lo][1];
         return "???";
     }
 
@@ -91,7 +91,7 @@
 
     function isPlainCEncode(codepoint) {
         // do not plain encode " and \ chars
-        if (codepoint === 92 || codepoint == 34) return false;
+        if (codepoint === 92 || codepoint === 34) return false;
         if (32 <= codepoint && codepoint <= 126) return true;
         return false;
     }
@@ -141,9 +141,9 @@
             for (const x of toUtf8(cp)) {
                 if (isPlainCEncode(cp))
                     cencoding += text[i];
-                else if (cp == 92) // the \ char
+                else if (cp === 92) // the \ char
                     cencoding += "\\\\";
-                else if (cp == 34) // the " char
+                else if (cp === 34) // the " char
                     cencoding += "\\\"";
                 else
                     cencoding += '\\x' + x.toString(16);
