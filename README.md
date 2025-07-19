@@ -7,6 +7,10 @@ UTF-16 (to clearly show the UTF-16 surrogate pairs in case of emojis and other n
 It also displays meaning of CJK characters from the Unihan database, but this is **not** a translator.
 No web requests past the original one for the page and data JSON, updates in real time.
 
+If you check the "Add search links" block, the text, codepoint, character name, and block name
+will become Google search links for given character or block. If you want other search engines
+included let me know via GitHub issues or email.
+
 To see it in action go to [https://frex.github.io/unicode.html](https://frex.github.io/unicode.html).
 Some examples:
 
@@ -18,6 +22,7 @@ Some examples:
 6. [русский язык](https://frex.github.io/unicode.html?text=%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9%20%D1%8F%D0%B7%D1%8B%D0%BA)
 7. [한국어](https://frex.github.io/unicode.html?text=%ED%95%9C%EA%B5%AD%EC%96%B4)
 8. [ඞඞඞ](https://frex.github.io/unicode.html?text=%E0%B6%9E%E0%B6%9E%E0%B6%9E)
+9. [abc日本語русский한국어🐌ඞ](https://frex.github.io/unicode.html?text=abc%E6%97%A5%E6%9C%AC%E8%AA%9E%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9%ED%95%9C%EA%B5%AD%EC%96%B4%F0%9F%90%8C%E0%B6%9E)
 
 ![screenshot.png](screenshot.png)
 
@@ -25,6 +30,7 @@ Some examples:
 Characters from other blocks (`Hangul Jamo`, `Hangul Compatibility Jamo`, `Hangul Jamo Extended-A`, and `Hangul Jamo Extended-B`)
 have names listed. This is how Unicode zip files list the data about these characters. I might try to do something about it
 in the future to provide readings/romanization of syllables for precomposed Hangul.
+Use GitHub issues or email if this is important for you.
 
 
 # Usage
