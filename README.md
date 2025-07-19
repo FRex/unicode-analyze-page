@@ -54,6 +54,8 @@ and run it, to generate `data.js` and `blocks.js`. The meaning of CJK characters
 
 Other tools to deal with Unicode strings, analyze them, convert them, etc. (some of these descriptions might be outdated since I've checked them once in the past, check yourself if you want to be doubly sure):
 
+1. [https://www.compart.com/en/unicode/](https://www.compart.com/en/unicode/) - very comprehensive, has all the data, shows various encodings for
+the given character, has CJK kDefinition field, and search for character by name (needs an enter press and submitting query to server to search).
 1. [https://www.fontspace.com/unicode/analyzer](https://www.fontspace.com/unicode/analyzer) - updates
 in real time, but the first time character appears it takes a split second to load its info. It also
 only lists the codepoint of CJK characters, but not their meanings. Provides the link with your input
