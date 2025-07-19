@@ -104,9 +104,20 @@
         return Array.from(ret).map(x => '0x' + x.codePointAt(0).toString(16).toUpperCase());
     }
 
+    function turnTextContentIntoSearchLinkInplace(elem) {
+        if (elem.textContent === "???") return; // skip making links of unknown chars
+        var anode = document.createElement('a');
+        anode.href = "https://www.google.com/search?q=" + encodeURIComponent(elem.textContent);
+        anode.textContent = elem.textContent;
+        elem.textContent = '';
+        elem.appendChild(anode);
+    }
+
     function refreshResults(firstload) {
         document.getElementById('unicode-version').innerText = unicode_version;
         var skipascii = document.getElementById("skipascii").checked;
+        var addsearchlinks = document.getElementById("addsearchlinks").checked;
+
         if (firstload) {
             var url = new URL(window.location.href);
             var textparam = url.searchParams.get("text");
@@ -151,7 +162,16 @@
 
             //increment here to not count ASCII when skipping ASCII and never count UTF-16 surrogates
             ++truelength;
-            results.appendChild(makeTableRow(tx, 'U+' + cp.toString(16).toUpperCase(), getCodepointName(cp), toUtf8Hex(cp), toUtf16Values(tx), findBlock(cp)));
+
+            var newrow = makeTableRow(tx, 'U+' + cp.toString(16).toUpperCase(), getCodepointName(cp), toUtf8Hex(cp), toUtf16Values(tx), findBlock(cp));
+
+            // turn the character name and block name into search columns if needed
+            if (addsearchlinks) {
+                turnTextContentIntoSearchLinkInplace(newrow.children[2]);
+                turnTextContentIntoSearchLinkInplace(newrow.children[5]);
+            }
+
+            results.appendChild(newrow);
 
             //skip over second codeunit if its surrogate pair
             if (nonbmp)
@@ -183,6 +203,7 @@
         <a id="permalink" href="">permalink</a>
         <span id="lengthoutput">0</span>
         <label>Skip ASCII:<input id="skipascii" type="checkbox" onchange="refreshResults(false);"></label>
+        <label>Add search links:<input id="addsearchlinks" type="checkbox" onchange="refreshResults(false);"></label>
         <table id="results"></table>
     </div>
 </body>
