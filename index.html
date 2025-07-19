@@ -107,10 +107,10 @@
         return Array.from(ret).map(x => '0x' + x.codePointAt(0).toString(16).toUpperCase());
     }
 
-    function turnTextContentIntoSearchLinkInplace(elem) {
+    function turnTextContentIntoSearchLinkInplace(elem, queryprefix = "") {
         if (elem.textContent === "???") return; // skip making links of unknown chars
         var anode = document.createElement('a');
-        anode.href = "https://www.google.com/search?q=" + encodeURIComponent(elem.textContent);
+        anode.href = "https://www.google.com/search?q=" + encodeURIComponent(queryprefix + elem.textContent);
         anode.textContent = elem.textContent;
         elem.textContent = '';
         elem.appendChild(anode);
@@ -170,8 +170,11 @@
 
             // turn the character name and block name into search columns if needed
             if (addsearchlinks) {
-                turnTextContentIntoSearchLinkInplace(newrow.children[2]);
-                turnTextContentIntoSearchLinkInplace(newrow.children[5]);
+
+                turnTextContentIntoSearchLinkInplace(newrow.children[0], "unicode character ");
+                turnTextContentIntoSearchLinkInplace(newrow.children[1], "unicode character ");
+                turnTextContentIntoSearchLinkInplace(newrow.children[2], "unicode ");
+                turnTextContentIntoSearchLinkInplace(newrow.children[5], "unicode block ");
             }
 
             results.appendChild(newrow);
