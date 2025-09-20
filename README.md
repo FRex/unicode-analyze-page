@@ -23,6 +23,7 @@ Some examples:
 1. [한국어](https://frex.github.io/unicode.html?text=%ED%95%9C%EA%B5%AD%EC%96%B4)
 1. [ඞඞඞ](https://frex.github.io/unicode.html?text=%E0%B6%9E%E0%B6%9E%E0%B6%9E)
 1. [abc日本語русский한국어🐌ඞ](https://frex.github.io/unicode.html?text=abc%E6%97%A5%E6%9C%AC%E8%AA%9E%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9%ED%95%9C%EA%B5%AD%EC%96%B4%F0%9F%90%8C%E0%B6%9E)
+1. [🂡🂱🃁🃑](https://frex.github.io/unicode.html?text=%F0%9F%82%A1%F0%9F%82%B1%F0%9F%83%81%F0%9F%83%91)
 
 ![screenshot.png](screenshot.png)
 
