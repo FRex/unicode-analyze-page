@@ -133,6 +133,8 @@
         if (text.length === 0)
             link = window.location.href.split('?')[0];
 
+        document.getElementById('examplebuttons').style.display = (text.length === 0) ? "block" : "none";
+
         document.getElementById("permalink").href = link;
         var results = document.getElementById("results");
         while (results.firstChild)
@@ -198,6 +200,11 @@
         document.getElementById("text").value = [...text].reverse().join("");
         refreshResults(false);
     }
+
+    function setTextAndRefreshResults(text) {
+        document.getElementById("text").value = text;
+        refreshResults(false);
+    }
 </script>
 
 <body onload="refreshResults(true);">
@@ -205,6 +212,23 @@
         <input type="text" oninput="refreshResults(false);" id="text" autofocus>
         <div id="unicode-version"></div>
         <div id="cencoding"></div>
+
+        <!-- same examples as in README on https://github.com/FRex/unicode-analyze-page -->
+        <div id="examplebuttons">
+            Examples:
+            <input type="button" value="abc" onclick="setTextAndRefreshResults(this.value)" />
+            <input type="button" value="español" onclick="setTextAndRefreshResults(this.value)" />
+            <input type="button" value="😀😁😎" onclick="setTextAndRefreshResults(this.value)" />
+            <input type="button" value="👨‍👩‍👧‍👦" onclick="setTextAndRefreshResults(this.value)" />
+            <input type="button" value="日本語" onclick="setTextAndRefreshResults(this.value)" />
+            <input type="button" value="русский язык" onclick="setTextAndRefreshResults(this.value)" />
+            <input type="button" value="한국어" onclick="setTextAndRefreshResults(this.value)" />
+            <input type="button" value="ඞඞඞ" onclick="setTextAndRefreshResults(this.value)" />
+            <input type="button" value="abc日本語русский한국어🐌ඞ" onclick="setTextAndRefreshResults(this.value)" />
+            <input type="button" value="🂡🂱🃁🃑" onclick="setTextAndRefreshResults(this.value)" />
+        </div>
+
+        <input type="button" value="Clear" onclick="setTextAndRefreshResults('')" />
         <input type="button" value="Reverse" onclick="reverseInput()" />
         <a id="permalink" href="">permalink</a>
         <span id="lengthoutput">0</span>
