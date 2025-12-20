@@ -124,8 +124,11 @@
         if (firstload) {
             var url = new URL(window.location.href);
             var textparam = url.searchParams.get("text");
-            if (textparam !== null)
-                document.getElementById("text").value = textparam;
+            if (textparam !== null) {
+                textelement = document.getElementById("text");
+                textelement.value = textparam;
+                textelement.selectionStart = textelement.selectionEnd = textparam.length;
+            }
         }
 
         var text = document.getElementById("text").value;
