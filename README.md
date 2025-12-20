@@ -38,7 +38,7 @@ Use GitHub issues or email if this is important for you.
 
 To deploy this tool yoursef you need the three files:
 
-1. `index.html` - the HTML with input box and inline JS to analyze the string.
+1. `unicode.html` - the HTML with input box and inline JS to analyze the string.
 1. `data.js` - the data as JSON, generated from `UCD.zip` and `Unihan.zip` files.
 1. `blocks.js` - the data as JSON, generated from `UCD.zip` file.
 
