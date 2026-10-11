@@ -120,6 +120,8 @@
         document.getElementById('unicode-version').innerText = unicode_version;
         var skipascii = document.getElementById("skipascii").checked;
         var addsearchlinks = document.getElementById("addsearchlinks").checked;
+        var alreadyseenset = null;
+        if (document.getElementById("uniqueonly").checked) alreadyseenset = new Set();
 
         if (firstload) {
             var url = new URL(window.location.href);
@@ -156,7 +158,14 @@
             if (skipascii && cp < 128)
                 continue;
 
-            //TODO: should this be before or after ascii skip?
+            if (alreadyseenset !== null) {
+                if (alreadyseenset.has(cp))
+                    continue;
+
+                alreadyseenset.add(cp);
+            }
+
+            //TODO: should this be before or after ascii skip and uniques handling?
             for (const x of toUtf8(cp)) {
                 if (isPlainCEncode(cp))
                     cencoding += text[i];
@@ -241,6 +250,7 @@
         <a id="permalink" href="">permalink</a>
         <span id="lengthoutput">0</span>
         <label>Skip ASCII:<input id="skipascii" type="checkbox" onchange="refreshResults(false);"></label>
+        <label>Unique only:<input id="uniqueonly" type="checkbox" onchange="refreshResults(false);"></label>
         <label>Add search links:<input id="addsearchlinks" type="checkbox" onchange="refreshResults(false);"></label>
         <table id="results"></table>
     </div>
